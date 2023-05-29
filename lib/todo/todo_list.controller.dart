@@ -10,8 +10,12 @@ class TodoListController extends GetxController {
   final todoService = TodoService();
 
   @override
-  Future<void> onInit() async {
-    todos(await todoService.getTodos());
+  void onInit() {
+    todoService.getTodos().then((todos) => {
+      if(todos.isNotEmpty) {
+        this.todos(todos)
+      }
+    });
     super.onInit();
   }
 
